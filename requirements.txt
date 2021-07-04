@@ -1,0 +1,10 @@
+flask
+flask_pymongo
+certifi
+requests_oauthlib
+dnspython
+flask_socketio
+pytz
+datetime
+simple-websocket
+flask_mail

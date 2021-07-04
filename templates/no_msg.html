@@ -1,0 +1,13 @@
+{% extends "bandeau.html" %}
+{% block content %}
+<script>
+    notifier.confirm("\nCe fil d'actualité est vide... N'hésitez pas à le remplir avec vos posts !", function(){
+        window.location.href = "/actu";
+        notifier.asyncBlock('', '', '', "Redirection vers le fil d'actualités en cours")
+    }, false, {
+      labels: {
+        confirm: 'Fil vide'
+      }
+    })
+</script>
+{% endblock %}

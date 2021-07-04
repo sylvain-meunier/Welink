@@ -1,0 +1,12 @@
+{% extends "bandeau.html" %}
+{% block content %}
+<script>
+    notifier.confirm("\nL'utilisateur que vous recherchez n'est pas sur ce réseau.", function(){
+        window.location.href = "/profil"
+    }, false, {
+      labels: {
+        confirm: 'Erreur...'
+      }
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,102 @@
+<head>
+<!--Page html chargée d'afficher le profil (avec sélection des centres d'intérêt entre autres)-->
+<link rel="stylesheet" href="https://www.jsdelivr.com/package/npm/@creativebulma/bulma-tagsinput/dist/css/bulma-tagsinput.min.css" />
+<script src="https://www.jsdelivr.com/package/npm/@creativebulma/bulma-tagsinput/dist/js/bulma-tagsinput.min.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/other_profile.js')}}"></script>
+<title>Welink | {{birth}} Profil de {{user['prenom']}} {{user['nom']}}</title>
+</head>
+
+{% extends 'bandeau.html' %}
+{% block content %}
+
+<!-- mise en place du cadre-->
+<div class="columns is-mobile">
+    <!-- partie présentation du profil, non modifiable-->
+    <div class="column is-full">
+    <div class="notification" style="background-color: #87a0ff;">
+        <div class="columns is-mobile">
+            <div class="column is-one-fourth">
+                <div class="box" style="width: 128px;">
+                <p class="has-text-centered"><img class="is-rounded" src="https://ent.iledefrance.fr/userbook/avatar/{{user['_id']}}?thumbnail=100x100"></p>
+                </div>
+                <div>
+                    <button class="button" onclick="privconvget(this, '{{user["_id"]}}', '{{user["prenom"]}} {{user["nom"]}}')">Envoyer un message</button>
+                </div>
+                <div>
+                    <button class="button is-danger" onclick="blockuser(this, '{{user["_id"]}}')">{% if blocked %}Débloquer cet utilisateur{% else %}Bloquer cet utilisateur{% endif %}</button>
+                    <a class="button is-danger" href="/report/{{user['_id']}}">Reporter cet utilisateur</a>
+                </div>
+            </div>
+            <div class="column is-one-fourth">
+                <div class="box">
+                <p class="has-text-centered">{{birth+user['prenom']}}</p>
+                </div>
+                <div class="box">
+                <p class="has-text-centered">{{user['lycee']}}</p>
+                </div>
+            </div>
+            <div class="column is-one-fourth">
+                <div class="box">
+                <p class="has-text-centered">{{user['nom']}}</p>
+                </div>
+                <div class="box">
+                <p class="has-text-centered">{{user['niveau']}}</p>
+                </div>
+            </div>
+            <div class="column is-one-fourth">
+                <div class="box">
+                <p class="has-text-centered">{{user['naissance']}}</p>
+                </div>
+                <div class="box">
+                <p class="has-text-centered">Nombre de messages : {{user['nbpost']}}</p>
+                </div>
+            </div>
+        </div>
+        <!-- formulaire biographie-->
+        <form class="box">
+            <div class="field">
+                <div class="control">
+                    <label class="label">Biographie :</label>
+                    <textarea type="text" rows=9 cols=68 class="form-control is-size-6 is-rounded" readonly>{{user['biographie']}}</textarea>
+                </div>
+            </div>
+        </form>
+        <!-- formulaire centres d'intérêt-->
+        <form class="box">
+            <div class="field">
+                <label class="label">Centres d'intérêt :</label>
+                <div class="field is-grouped is-grouped-multiline">
+                {% for interet in user['interets'] %}
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <a href="/interet/{{interet}}">
+                                <span class="tag" style="background-color: #ffc162;">
+                                    {{interet}}
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </form>
+        <!-- formulaire réseaux-->
+        <form class="box">
+            <div class="field">
+                <label class="label">Autres réseaux :</label>
+                <div class="field is-grouped is-grouped-multiline">
+                {% for reseau, nom in user['reseaux'].items() %}
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag" style="background-color: #ffc162;">{{reseau}}</span>
+                            <span class="tag" style="background-color: #ffe4c0;">{{nom}}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    </div>
+{% endblock %}

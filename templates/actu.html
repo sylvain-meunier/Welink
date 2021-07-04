@@ -1,0 +1,25 @@
+<!-- Page html chargée d'afficher le fil d'actualité -->
+
+<head>
+    <title>Welink | Actualités</title>
+    <script type="text/javascript" charset="utf-8" src="{{url_for('static', filename='js/actu.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetconfirm.js@0/sweetconfirm.min.js"></script>
+</head>
+{% extends 'bandeau.html' %}
+{% block content %}
+
+<div style="display: none;" id="Answer42" msgid="" comcolor="">
+  {% include "com_creation.html" %}
+</div>
+<div class="box">
+  {% if msgs %}
+    {% for msg in msgs %}
+       {% include 'post.html' %}
+       <hr id="separationmsg{{msg['_id']}}">
+    {% endfor %}
+  {% else %}
+    <p>Ton fil est bien vide...<br>Tu peux y remédier en écrivant plein de posts !</p>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/backrd.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='js/notifications/style.css')}}">
+    <script src="{{url_for('static', filename='js/notifications/index.var.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/firstime.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.js"></script> <!-- slim select, see : https://slimselectjs.com/ -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet"></link>
+    <title>Welink | Inscription</title>
+</head>
+
+<body>
+    <video id="bgvid" playsinline autoplay muted loop>
+        <source src="{{url_for('static', filename='background.mp4')}}" type="video/mp4">
+    </video>
+
+    <script>
+      let onOk = () => {notifier.info('Bienvenue sur Welink\n{{user["firstName"]}} {{user["lastName"]}} !')};
+      notifier.confirm(
+        "Welink est un réseau social lycéen dont le but est de permettre à tous de partager entre eux leurs passions. Tu pourras mettre des posts en ligne, écrire des commentaires, laisser des likes sous les publications que tu aimes et rencontrer d'autres personnes avec les mêmes centres d'intérêt que toi !",
+        onOk,
+        false,
+        {
+          labels: {
+            confirm: 'Bienvenue !'
+          }
+        }
+      )
+    </script>
+
+    <form class="box" action="/firstconnection" onsubmit="return update_interets(dropdown.selected());" method="POST">
+      <div class="field">
+          <input name="hidTest" id="hidTest" type="hidden" value="">
+          <label class="label">Sélectionne tes centres d'intérêt :</label>
+          <div class="field is-grouped is-grouped-multiline">
+              <div class="column">
+                    <div class="column">
+                        <select id="multiple" multiple>
+                          {% for interet in gl_interets %}
+                            <option value="{{interet}}">{{interet}}</option>
+                          {% endfor %}
+                        </select>
+                        <script>
+                          var dropdown = new SlimSelect({
+                          select: '#multiple',
+                          placeholder: "Centres d'intérêt",
+                          searchText: "Rechercher",
+                          searchPlaceholder: "Aucun résultat",
+                          searchFocus: true,
+                          searchHighlight: true,
+                          closeOnSelect: false,
+                          showOptionTooltips: true,
+                          hideSelectedOption: true
+                          });
+                        </script>
+                      </div>
+                </div>
+          </div>
+      </div>
+      <button type="submit" class="button is-primary">
+          Enregistrer les modifications
+      </button>
+  </form>
+
+</body>

@@ -1,0 +1,52 @@
+{% if previous %}
+<head>
+  <title>Welink | Commentaire - Modification</title>
+</head>
+{% extends 'bandeau.html' %}
+{% endif %}
+{% block content %}
+{% if previous %}
+<body>
+<form class="form" action="/update/com/{{previous['_id']}}" method="POST" onSubmit="return confirm('Enregistrer les modifications ?');">
+{% else %}
+<form onsubmit="send_comment('Answer42btn');  return false;">
+{% endif %}
+  <div class="box is-shadowless">
+    <article class="media">
+      <figure class="media-left">
+       <p class="image is-64x64">
+          <img class="is-rounded" src="https://ent.iledefrance.fr/userbook/avatar/{{user['_id']}}?thumbnail=100x100">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="field">
+          <p class="control">
+            <textarea class="textarea" id="Answer42contenu" rows=6 style="width: 100%;" maxlength="800" name="contenu" placeholder="Ajouter un commentaire..." required>{{previous['contenu']}}</textarea>
+          </p>
+        </div>
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+                {% if previous %}
+                <button type='submit' class="button is-info is-active">Modifier</button>
+                {% else %}
+                <button id="Answer42btn" type="submit" class="button is-info is-active">Commenter</button>
+                {% endif %}
+            </div>
+          </div>
+          {% if previous %}
+          <div class="level-right">
+            <div class="level-item">
+              <a href="/actu" class="button is-danger is-outlined">Annuler</a>
+            </div>
+          </div>
+          {% endif %}
+        </nav>
+      </div>
+    </article>
+  </div>
+</form>
+{% if previous %}
+</body>
+{% endif %}
+{% endblock %}

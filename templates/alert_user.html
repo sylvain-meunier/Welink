@@ -1,0 +1,17 @@
+<head>
+    <title>Welink | Blocage</title>
+</head>
+
+{% extends 'bandeau.html' %}
+
+{% block content %}
+
+<script>
+    new AWN().confirm('{{msg}}', () => window.location.href = "/actu", false, {
+        labels: {
+            confirm : "Information"
+        }
+    });
+</script>
+
+{% endblock %}

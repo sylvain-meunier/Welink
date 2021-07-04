@@ -1,0 +1,80 @@
+<body>
+  <div class="box is-shadowless" id="msgdiv{{msg['_id']}}" post="true" style="padding: 0px;">
+    <div class="columns" style="padding-bottom: 0px;">
+        <div class="column" style="padding-bottom: 0px;">
+            <div class="media" style="padding-bottom: 0px;">
+                <div class="media-left" style="padding: 0px;">
+                    <figure class="image is-64x64">
+                        <a href="/profil/{{msg['userid']}}">
+                            <img class="is-rounded" src="https://ent.iledefrance.fr/userbook/avatar/{{msg['userid']}}?thumbnail=100x100" title="Voir le profil">
+                        </a>
+                    </figure>
+                </div>
+                <div class="media-content" style="padding-bottom: 0px;">
+                    <p class="is-size-4" style="padding-bottom: 0px;">{{msg['prenom']}} {{msg['nom']}}</p>
+                    <p class="is-size-6" style="padding-bottom: 0px;">{{msg['date']}}</p>
+                </div>
+            </div>
+         </div>
+         <div class="column" style="padding-bottom: 0px;">
+            <div class="column" style="padding-bottom: 0px;">
+                <div class="is-pulled-right" style="padding-bottom: 0px;">
+                    <p class="is-size-4" style="padding-bottom: 0px;">
+                      {% for interet in msg['interets'] %}
+                        <a href="/interet/{{interet}}">
+                            <span class="tag is-rounded is-large is-size-6" title="Voir les messages liés à : {{interet}}" style="padding-bottom: 0px;">{{interet}}</span>
+                        </a>
+                      {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class=" title is-4" style="padding: 0px;">
+      {{msg['titre'][:maxtitre]}}{% if msg['titre'][maxtitre:] %}<a onclick="show_msg(this, '{{msg["titre"]}}', '{{msg["titre"][:maxtitre]}}')">...</a>
+      {% endif %}
+    </p>
+    {% if msg['img'] %}
+    <div class="box is-shadowless">
+        <div class="card-image">
+            <figure class="photo du post"> <!-- s'il y en a une -->
+              <img src={{url_for('static', filename=msg['img'])}} alt="Photo du post">
+            </figure>
+        </div>
+    </div>
+    {% endif %}
+    <div class="block">
+      {{msg['contenu'][:maxcontenu]}}{% if msg['contenu'][maxcontenu:] %}<a onclick="show_msg(this, '{{msg["contenu"]}}', '{{msg["contenu"][:maxcontenu]}}')">...</a>
+      {% endif %}
+    </div>
+    {% if msg['userid'] == user['_id'] %}
+    <button class="button is-rounded is-static is-ghost" disabled>
+      {{msg["like"]}} <i class="fas fa-heart" style="margin-left: 5px;"></i>
+    {% elif msg['liked'] %}
+    <button class="button is-rounded is-ghost" id="{{msg['_id']}}" onclick="jslike(this.id)">
+      {{msg["like"]}} <i class='fas fa-heart' style="color: #ffc162; margin-left: 5px;"></i>
+    {% else %}
+    <button class="button is-rounded is-ghost" id="{{msg['_id']}}" onclick="jslike(this.id)">
+      {{msg["like"]}} <i class="far fa-heart" style="margin-left: 5px;"></i>
+    {% endif %}
+    </button>
+    <button class="button is-rounded is-ghost" id="COMMENTAIRE{{msg['_id']}}" onclick="show_comment(this, '{{msg["_id"]}}', this.id, null)">
+      {{msg['comms']}} <i class="fas fa-comments" style="margin-left: 5px;"></i>
+    </button>
+    <button class="button is-rounded is-ghost" onclick="answer(this, '{{msg["_id"]}}', null)">
+      <i class="fas fa-comment-medical"></i>
+    </button>
+    {% if msg['userid'] == user['_id'] %}
+    <a href="/update/msg/{{msg['_id']}}">
+      <button class="button is-rounded">
+        Modifier
+      </button>
+    </a>
+    <form onsubmit="delete_msg('{{msg["_id"]}}') ; return false;" style="display: inline;">
+      <button type="submit" class="button is-danger">
+        Supprimer
+      </button>
+    </form>
+    {% endif %}
+  </div>
+</body>

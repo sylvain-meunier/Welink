@@ -1,0 +1,68 @@
+<div class="box" style="background-color: rgb({{color}});">
+  <div class="columns">
+    <div class="column">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-64x64">
+            <a href="/profil/{{com['userid']}}">
+              <img class="is-rounded" src="https://ent.iledefrance.fr/userbook/avatar/{{com['userid']}}?thumbnail=100x100" title="Voir le profil">
+            </a>
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="is-size-5">{{com['prenom']}} {{com['nom']}}</p>
+          <p class="is-size-6">{{com['date']}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="columns"> 
+        <div class="column">
+          <div class="is-pulled-right">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box is-shadowless">
+    {% if com['img'] %}
+    <div class="card-image" style="padding-bottom: 5px; padding-top: 5px;">
+      <figure class="photo du post"> <!-- s'il y en a une -->
+        <img src={{url_for('static', filename=com['img'])}} alt="Photo du post">
+      </figure>
+    </div>
+    {% endif %}
+    <div class="block">
+      {{com['contenu'][:maxcontenu]}}{% if com['contenu'][maxcontenu:] %}<a onclick="show_msg(this, '{{com["contenu"]}}', '{{com["contenu"][:maxcontenu]}}')">...</a>{% endif %}
+    </div>
+    {% if com['userid'] == user['_id'] %}
+    <button class="button is-rounded is-static is-ghost" disabled>
+      {{com["like"]}} <i class="fas fa-heart" style="margin-left: 5px;"></i>
+    {% elif com['liked'] %}
+    <button class="button is-rounded is-ghost" id="{{com['_id']}}" onclick="jslike(this.id)">
+      {{com["like"]}} <i class='fas fa-heart' style="color: #ffc162; margin-left: 5px;"></i>
+    {% else %}
+    <button class="button is-rounded is-ghost" id="{{com['_id']}}" onclick="jslike(this.id)">
+      {{com["like"]}} <i class="far fa-heart" style="margin-left: 5px;"></i>
+    {% endif %}
+    </button>
+    <button class="button is-rounded is-ghost" id="COMMENTAIRE{{com['_id']}}" onclick="show_comment(this, '{{com["_id"]}}', this.id, null)">
+      {{com['comms']}} <i class="fas fa-comments" style="margin-left: 5px;"></i>
+    </button>
+    <button class="button is-rounded is-ghost" onclick="answer(this, '{{com["_id"]}}', null)">
+      <i class="fas fa-comment-medical"></i>
+    </button>
+    {% if com['userid'] == user['_id'] %}
+    <a href="/update/com/{{com['_id']}}">
+      <button class="button is-rounded">
+        Modifier
+      </button>
+    </a>
+    <form onsubmit="delete_msg('{{com["_id"]}}') ; return false;" style="display: inline;">
+      <button type="submit" class="button is-danger">
+        Supprimer
+      </button>
+    </form>
+    {% endif %}
+  </div>
+</div>

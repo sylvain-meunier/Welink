@@ -1,0 +1,24 @@
+<head>
+  <title>Welink | Conversations</title>
+  <script type="text/javascript" src="{{url_for('static', filename='js/mp.js')}}"></script>
+</head>
+{% extends 'bandeau.html' %}
+
+{% block content %}
+
+<div class="box" id="privmsgbox">
+  {% if msgs %}
+    {% for msg in msgs %}
+      {% include 'mp.html' %}
+    {% endfor %}
+  {% else %}
+  <p>
+    Aucun message n'a été trouvé... pour le moment !
+  </p>
+  {% endif %}
+</div>
+<div id='Answer24Priv'>
+  {% include 'mp_creation.html' %}
+</div>
+
+{% endblock %}

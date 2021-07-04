@@ -1,0 +1,132 @@
+<head>
+  {% if contact and not previous %}
+  <title>Welink | Nous contacter</title>
+  {% elif contact and previous %}
+  <title>Welink | Report</title>
+  {% elif previous %}
+  <title>Welink | Post - Modification</title>
+  {% else %}
+  <title>Welink | Nouveau post</title>
+  {% endif %}
+  <script src="{{url_for('static', filename='js/post.js')}}"></script>
+</head>
+{% extends 'bandeau.html' %}
+{% block content %}
+<body>
+  {% if contact and not previous %}
+  <form class="is-full" action="/contact" method="POST" onsubmit="return confirm('Envoyer le rapport ?');">
+  {% elif contact and previous %}
+  <form class="is-full" action="/report/{{reportid}}" method="POST" onsubmit="return confirm('Envoyer le rapport ?');">
+  {% elif previous %}
+  <form class="is-full" action="/update/msg/{{previous['_id']}}" method="POST" onsubmit="return upd_msg();">
+    <input name="hidTest" id="hidTest" type="hidden" value="">
+  {% else %}
+  <form class="is-full" onsubmit="post_msg(); return false;">
+  {% endif %}
+  <div class="box">
+    <div class="columns">
+      <div class="column">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-96x96">
+              <img class="is-rounded" src="https://ent.iledefrance.fr/userbook/avatar/{{user['_id']}}?thumbnail=100x100">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="is-size-5">{{check_birthday(user["naissance"])+user['prenom']}} {{user['nom']}}</p>
+            <article class="media">
+              <div class="media-content">
+                <div class="field">
+                  <p class="control">
+                    <div class="form-group">
+                      {% if contact %}
+                      <input type="text" class="form-control is-size-5 is-rounded" id="sujet" name="sujet" maxlength="800" placeholder="Sujet..."{% if previous %}value = "{{previous}}"{% endif %} required>
+                      {% else %}
+                      <input type="text" class="form-control is-size-5 is-rounded" id="titre" name="titre" maxlength="800" placeholder="Ajouter un titre..." value='{{previous["titre"]}}' required>
+                      {% endif %}
+                    </div>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+      {% if not contact %}
+      <div class="column">
+        <div>
+          <div class="column">
+            <div class="is-pulled-right">
+              <select id="multiple" multiple>
+                {% for interet in user["interets"] %}
+                  <option value="{{interet}}">{{interet}}</option>
+                {% endfor %}
+              </select>
+              <script>
+                var dropdown = new SlimSelect({
+                select: '#multiple',
+                placeholder: "Centres d'intérêt",
+                searchText: "Rechercher",
+                searchPlaceholder: "Aucun résultat",
+                searchFocus: true,
+                searchHighlight: true,
+                closeOnSelect: false,
+                showOptionTooltips: true,
+                hideSelectedOption: true
+                });
+                var list = [];
+                {% for interet in previous['interets'] %}
+                list.push("{{interet}}");
+                {% endfor %}
+                dropdown.set(list);
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <!--
+    <div class="card-image">
+      <figure class="photo du post">
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+      </figure>
+    </div>
+    -->
+    <article class="media">
+      <div class="media-content">
+        <div class="field">
+          <p class="control">
+            <div class="form-group">
+              {% if contact %}
+              <textarea type="text" rows=6 style="width: 100%;" class="form-control is-size-6 is-rounded" id="contenu" name="contenu" maxlength="3500" placeholder="Précisions..." required></textarea>
+              {% else %}
+              <textarea type="text" rows=6 style="width: 100%;" class="form-control is-size-6 is-rounded" id="contenu" name="contenu" maxlength="3000" placeholder="Ton message..." required>{{previous["contenu"]}}</textarea>
+              {% endif %}
+            </div>
+          </p>
+        </div>
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              {% if contact %}
+              <button type="submit" class="button is-warning is-active">Envoyer</button>
+              {% elif previous %}
+              <button type="submit" class="button is-success is-active">Modifier</button>
+              {% else %}
+              <button type="submit" class="button is-success is-active">Poster</button>
+              {% endif %}
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item">
+              <a href="/actu" class="button is-danger is-outlined">Annuler</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </article>
+  </div>
+</form>
+</body>
+{% endblock %}

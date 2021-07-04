@@ -1,0 +1,42 @@
+<form onsubmit="send_private_msg('{{var_namespace}}'); return false;">
+  <div class="box is-shadowless" style="padding-top: 0%;">
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img class="is-rounded" src="https://ent.iledefrance.fr/userbook/avatar/{{user['_id']}}?thumbnail=100x100">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="field">
+          <p class="control">
+            <input class="textarea" id="textmp{{var_namespace}}" rows=1 style="width: 100%;" maxlength="900" placeholder="Envoyer un message..." autofocus required>
+          </p>
+        </div>
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <button type="submit" class="button" id="buttmp{{var_namespace}}">
+                  Envoyer
+              </button>
+              <script type="text/javascript">
+                  input = document.getElementById("textmp{{var_namespace}}")
+                  input.scrollIntoView()
+                  btn = document.getElementById("buttmp{{var_namespace}}")
+                  input.addEventListener("keyup", function(event) {
+                  if (event.keyCode === 13 && !event.shiftKey) {
+                      event.preventDefault();
+                      btn.click();
+                    }
+                  });
+                  var conv = document.getElementById("listebandeauconv{{var_namespace}}")
+                  if (conv){
+                    conv.style.backgroundColor = "white";
+                  }
+              </script>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </article>
+  </div>
+</form>
