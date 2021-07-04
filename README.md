@@ -43,17 +43,17 @@ WORTH TO SEE :
    * jinja-to-js (https://github.com/jonbretman/jinja-to-js)
 
 Escouade composée de :
-   * Equipe Centres d'intérêt
+   * Equipe 'Centres d'intérêt'
       * Alexandre DURIF
       * Sydney GIRARDEAU
 
-   * Equipe Design
+   * Equipe 'Design'
       * Milo DECARLI
       * Raphaël GONCALVES DOS SANTOS
       * Amélie LE DANTEC
       * Athène ROUSSEAU RAMBACH
 
-   * Equipe Code
+   * Equipe 'Code'
       * Tom BOURLARD
       * Romain JUDAS
       * Eliott MEUNIER
