@@ -35,8 +35,8 @@ MODULES UTILISES :
     * Font awesome (https://fontawesome.com/)
 
 * JavaScript + CSS :
-    * slim select (https://slimselectjs.com/)
-    * awesome notifications (https://github.com/f3oall/awesome-notifications)
+    * slim select (https://slimselectjs.com/), see slim-select-license.txt
+    * awesome notifications (https://github.com/f3oall/awesome-notifications), see awesome-notifications-license.txt 
 
 * WORTH TO SEE :
     * PyMongo operators (https://docs.mongodb.com/manual/reference/operator)
