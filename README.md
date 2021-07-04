@@ -42,6 +42,8 @@ WORTH TO SEE :
    * PyMongo operators (https://docs.mongodb.com/manual/reference/operator)
    * jinja-to-js (https://github.com/jonbretman/jinja-to-js)
 
+<hr>
+
 Escouade composée de :
    * Equipe 'Centres d'intérêt'
       * Alexandre DURIF
