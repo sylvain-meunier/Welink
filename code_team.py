@@ -297,7 +297,7 @@ def delete_user(userid) :
     convs = mongo.db.Conversations.find({"users": {"$in" : [userid]}})
     for conv in convs :
         leave_conv(conv['_id'], userid) # Supprime les conversations
-    mongo.db.Privates.delete_many({"userid" : userid}) # Supprimer les messages privés, si jamais il en restait
+    mongo.db.Privates.delete_many({"userid" : userid}) # Supprime les messages privés, si jamais il en restait
     mongo.db.Banned.delete_one({'_id' : userid}) # Supprime l'utilisateur de la table des Bannis
     mongo.db.Users.delete_one({'_id' : userid}) # Supprime l'utilisateur
 
