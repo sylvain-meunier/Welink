@@ -24,7 +24,6 @@ with open("static/interests.array", 'r', encoding="utf-8") as file :
 
 # App
 app = Flask("Welink")
-app.secret_key = 'secret'
 socketio = SocketIO(app)
 app.config["MONGO_URI"] = 'secret'
 mongo = PyMongo(app, tlsCAFile=certifi.where())
@@ -34,7 +33,7 @@ mail_settings = {
     "MAIL_PORT": 465,
     "MAIL_USE_TLS": False,
     "MAIL_USE_SSL": True,
-    "MAIL_USERNAME": "welink.ctl@gmail.com",
+    "MAIL_USERNAME": contact_mail,
     "MAIL_PASSWORD": "secret"
 }
 
@@ -43,7 +42,7 @@ mail = Mail(app)
 
 app_url = "https://we-link.herokuapp.com"
 
-client_id = 'code-ton-lycee'
+client_id = 'secret'
 client_secret = 'secret'
 authorization_base_url = 'https://ent.iledefrance.fr/auth/oauth2/auth'
 token_url = 'https://ent.iledefrance.fr/auth/oauth2/token'
