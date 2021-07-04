@@ -1,6 +1,6 @@
 # Welink
 [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
-<img src="https://github.com/sylvain-meunier/Welink/blob/main/static/logo.png" align="right" height="200" width="200">
+<img src="https://github.com/sylvain-meunier/Welink/blob/master/static/logo.png" align="right" height="200" width="200">
 
 Github public du projet Welink, organisé à l'occasion de la saison 2021 de Code ton Lycée
 
