@@ -38,9 +38,9 @@ MODULES UTILISES :
     * slim select (https://slimselectjs.com/), see slim-select-license.txt
     * awesome notifications (https://github.com/f3oall/awesome-notifications), see awesome-notifications-license.txt 
 
-* WORTH TO SEE :
-    * PyMongo operators (https://docs.mongodb.com/manual/reference/operator)
-    * jinja-to-js (https://github.com/jonbretman/jinja-to-js)
+WORTH TO SEE :
+   * PyMongo operators (https://docs.mongodb.com/manual/reference/operator)
+   * jinja-to-js (https://github.com/jonbretman/jinja-to-js)
 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
