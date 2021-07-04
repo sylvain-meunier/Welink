@@ -42,6 +42,26 @@ WORTH TO SEE :
    * PyMongo operators (https://docs.mongodb.com/manual/reference/operator)
    * jinja-to-js (https://github.com/jonbretman/jinja-to-js)
 
+Escouade composée de :
+   * Equipe Centres d'intérêt
+      * Alexandre DURIF
+      * Sydney GIRARDEAU
+
+   * Equipe Design
+      * Milo DECARLI
+      * Raphaël GONCALVES DOS SANTOS
+      * Amélie LE DANTEC
+      * Athène ROUSSEAU RAMBACH
+
+   * Equipe Code
+      * Tom BOURLARD
+      * Romain JUDAS
+      * Eliott MEUNIER
+      * Sylvain MEUNIER
+      * Lucas PICHON
+
+   * Solène NEUVILLE
+
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
 
