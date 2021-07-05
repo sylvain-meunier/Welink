@@ -50,7 +50,7 @@ Escouade composée de :
       * Sydney GIRARDEAU
 
    * Equipe 'Design'
-      * Milo DECARLI
+      * Milo DECARLI (lylou.decarli@sfr.fr)
       * Raphaël GONCALVES DOS SANTOS (d.sraphy@free.fr)
       * Amélie LE DANTEC
       * Athène ROUSSEAU RAMBACH (athene.rousseaurambach@gmail.com)
