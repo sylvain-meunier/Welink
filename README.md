@@ -51,15 +51,15 @@ Escouade composée de :
 
    * Equipe 'Design'
       * Milo DECARLI
-      * Raphaël GONCALVES DOS SANTOS
+      * Raphaël GONCALVES DOS SANTOS (d.sraphy@free.fr)
       * Amélie LE DANTEC
-      * Athène ROUSSEAU RAMBACH
+      * Athène ROUSSEAU RAMBACH (athene.rousseaurambach@gmail.com)
 
    * Equipe 'Code'
-      * Tom BOURLARD
+      * Tom BOURLARD (bourlard.tom.94@gmail.com)
       * Romain JUDAS
       * Eliott MEUNIER
-      * Sylvain MEUNIER
+      * Sylvain MEUNIER (sysyl.meunier@hotmail.fr)
       * Lucas PICHON
 
    * Solène NEUVILLE
