@@ -64,6 +64,11 @@ Escouade composée de :
 
    * Solène NEUVILLE
 
+Avec l'aide de :
+   * Térence DAGANNAUD-DELISLE
+   * Athénaïs HAROUARD
+   * Alexandre MICHEL
+
 Contact : en cas de besoin, envoyez un mail à : welink.ctl@gmail.com
 
 This work is licensed under a
