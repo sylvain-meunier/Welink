@@ -64,6 +64,8 @@ Escouade composée de :
 
    * Solène NEUVILLE
 
+Contact : en cas de besoin, envoyez un mail à : welink.ctl@gmail.com
+
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
 
