@@ -7,16 +7,16 @@
 {% block content %}
 
 <!-- mise en place du cadre-->
-<div class="columns is-mobile">
+<div class="columns">
     <!-- partie présentation du profil, non modifiable-->
     <div class="column is-full">
         <div class="notification" style="background-color: #87a0ff;">
-            <div class="columns is-mobile">
+            <div class="columns">
                 <div class="column is-one-fourth">
                     <div class="box" style="width: 170px;">
                         <p class="has-text-centered">
                             <a href="https://ent.iledefrance.fr/userbook/mon-compte#/edit-me" target="_blank" rel="noopener noreferrer">
-                                <img class="is-rounded" src="https://ent.iledefrance.fr/userbook/avatar/{{user['_id']}}?thumbnail=100x100" title="Votre photo de profil peut être changée depuis l'ENT.&#013Allez-y en cliquant ici !">
+                                <img src="https://ent.iledefrance.fr/userbook/avatar/{{user['_id']}}?thumbnail=100x100" title="Votre photo de profil peut être changée depuis l'ENT.&#013Allez-y en cliquant ici !">
                             </a>
                         </p>
                     </div>
@@ -53,7 +53,7 @@
                     <div class="field">
                         <p class="control">
                           <div class="form-group">
-                            <textarea type="text" rows=9 cols=68 class="form-control is-size-6 is-rounded" id="biographie" name="biographie" maxlength="500" placeholder="Maximum 500 caractères...">{{user['biographie']}}</textarea>
+                            <textarea type="text" rows=9 style="width:100%;" class="form-control is-size-6 is-rounded" id="biographie" name="biographie" maxlength="500" placeholder="Maximum 500 caractères...">{{user['biographie']}}</textarea>
                           </div>
                         </p>
                       </div>

@@ -24,29 +24,29 @@
 
             <!-- Bouton de déplacement interne au site (mon profil / fil d'actualité) -->
 
-                <div class="column is-mobile is-one-fourth">
+                <div class="column is-mobile is-one-fifth is-half-mobile" align="left">
                     <div class="columns is-mobile">
                         <a class="column is-mobile is-two-thirds" style="text-decoration: none;" href="/{{etat}}">
-                            <button class="button is-info is-medium is-rounded is-light" style="margin-right: 10%; margin-left: 10%;">{{navbar}}</button>
+                            <button class="button is-info is-rounded is-light" style="margin-right: 10%; margin-left: 10%;">{{navbar}}</button>
                         </a>
 
             <!-- Cloche des notifications -->
 
                         <div class="column is-mobile is-two-fifths">
 
-                        <div class="tags has-addons" style="transform: translateY(+15%);">
+                        <div class="tags has-addons" style="transform: translateY(+8%);">
                             {% if 'notifon' in user and not user['notifon'] %}
-                                <button class="button" onclick="update_notif_opt(this)"><i class="far fa-bell-slash"></i></button>
+                                <button class="button" style="font-size: 0.9rem; padding-right: 0.5rem; padding-left: 0.5rem" onclick="update_notif_opt(this)"><i class="far fa-bell-slash"></i></button>
                             {% else %}
-                                <button class="button" onclick="update_notif_opt(this)"><i class="far fa-bell"></i></button>
+                                <button class="button" style="font-size: 0.9rem; padding-right: 0.5rem; padding-left: 0.5rem" onclick="update_notif_opt(this)"><i class="far fa-bell"></i></button>
                             {% endif %}
                     
                     <!-- Liste des notifications -->
                             
                             <div class="dropdown">
                                 <div class="dropdown-trigger">
-                                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-notifs">
-                                    <span class="icon is-small">
+                                  <button class="button" style="font-size: 0.9rem; padding-right: 0.5rem; padding-left: 0.5rem" aria-haspopup="true" aria-controls="dropdown-menu-notifs">
+                                    <span class="icon">
                                       <i class="fas fa-angle-down" aria-hidden="true"></i>
                                     </span>
                                   </button>
@@ -74,7 +74,7 @@
 
             <!-- Spécifique aux messages privés -->
 
-                <div class="column is-mobile is-half">
+                <div class="column is-mobile is-three-fifths is-full-mobile" align="center">
 
                     <div style="transform: translateY(+25%);">
 
@@ -125,24 +125,24 @@
 
             <!-- Barre de recherche -->
 
-                <div class="column is-mobile is-half">
+                <div class="column is-mobile is-three-fifths is-full-mobile" align="center">
 
-                    <div class="field is-grouped" style="transform: translateY(+15%);">
+                    <div class="field is-grouped" style="transform: translateY(+8%);">
                         <form style="display: inline; width: 100%; margin: 0px;" onsubmit="bandeausearch(); return false">
                             <div style="display:flex;">
-                                <input id="bandeauresearchbar" class="input" style="display: flex;" type="text" placeholder="Rechercher..." required autofocus>
-                                    <div class="select">
-                                      <select id="selectfiltermsg">
+                                <input id="bandeauresearchbar" class="input" style="margin-left: 1%;display: flex; font-size: 0.9rem; width: 60%;" type="text" placeholder="Rechercher..." required autofocus>
+                                <div class="select" style="font-size: 0.9rem">
+                                    <select id="selectfiltermsg">
                                         <option>Message</option>
                                         <option>Utilisateur</option>
                                         <option>Commentaire</option>
                                         <option>Aimé</option>
-                                      </select>
-                                    </div>
-                                <button id="bandeauresearchbutton" type="submit" class="button" style="background-color: #eef6fc;">
+                                    </select>
+                                </div>
+                                <button id="bandeauresearchbutton" type="submit" class="button" style="background-color: #eef6fc; font-size: 0.9rem; margin-inline: 1%;">
                                     Rechercher
                                 </button>
-                                <a style="transform: translate(+33%, +25%);" href="/actu">
+                                <a style="transform: translate(+33%, +25%); font-size: 0.9rem;" href="/actu">
                                     <i class="fas fa-redo-alt"></i>
                                 </a>
                             </div>
@@ -163,18 +163,18 @@
 
             <!-- Nous contacter -->
 
-                <div class="column is-mobile is-one-fourth">
+                <div class="column is-mobile is-one-fifth is-half-mobile" align="right">
                     <div class="columns is-mobile">
                         <div class="column">
                             <a style="text-decoration: none;" href="/contact">
-                                <button class="button is-light is-rounded is-medium is-info">Nous contacter</button>
+                                <button class="button is-light is-rounded is-info" align="left">Nous contacter</button>
                             </a>
                         </div>
 
             <!-- Logo du site -->
                         <div class="column">
-                            <figure class="image is-48x48">
-                                <img src={{url_for('static', filename="logo.png")}}>
+                            <figure class="image" style="width: 2.5rem; margin-right: 20%;">
+                                <img src={{url_for('static', filename="logo.png")}} align="right">
                             </figure>
                         </div>
                     </div>
@@ -188,11 +188,11 @@
 
     <!-- Début de l'affichage courant -->
 
-        <div class="columns is-mobile is-full">
+        <div class="columns is-full">
 
-            <!-- Filtres (centres d'intérêt) -->
+            <!-- Conversations -->
 
-            <div class="column is-mobile is-one-fifth">
+            <div class="column is-one-fifth is-half-mobile is-half-tablet" style="z-index: 0;" align="left">
 
                 <!-- Bouton pour écrire un post -->
 
@@ -216,13 +216,13 @@
 
                 <!-- Contenu de la page -->
 
-            <div id="pagemaincontent" class="column is-three-fifths is-mobile" style="z-index: 20;">
+            <div id="pagemaincontent" class="column is-three-fifths is-full-mobile is-three-fourths-tablet" style="z-index: 20;">
                 {% block content %}{% endblock %}
             </div>
 
-                <!-- Conversations -->
+                <!-- Filtres (centres d'intérêts) -->
 
-            <div class="column is-one-fifth is-mobile" style="z-index: 0;">
+            <div class="column is-one-fifth is-half-mobile is-half-tablet" style="z-index: 0;">
                 <div class="box is-shadowless" style="position: fixed; width: 20%;">
                     <div class="menu">
                         <p class="menu-label">
