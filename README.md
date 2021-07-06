@@ -35,12 +35,41 @@ MODULES UTILISES :
     * Font awesome (https://fontawesome.com/)
 
 * JavaScript + CSS :
-    * slim select (https://slimselectjs.com/)
-    * awesome notifications (https://github.com/f3oall/awesome-notifications)
+    * slim select (https://slimselectjs.com/), see slim-select-license.txt
+    * awesome notifications (https://github.com/f3oall/awesome-notifications), see awesome-notifications-license.txt 
 
-* WORTH TO SEE :
-    * PyMongo operators (https://docs.mongodb.com/manual/reference/operator)
-    * jinja-to-js (https://github.com/jonbretman/jinja-to-js)
+WORTH TO SEE :
+   * PyMongo operators (https://docs.mongodb.com/manual/reference/operator)
+   * jinja-to-js (https://github.com/jonbretman/jinja-to-js)
+
+<hr>
+
+Escouade composée de :
+   * Equipe 'Centres d'intérêt'
+      * Alexandre DURIF
+      * Sydney GIRARDEAU
+
+   * Equipe 'Design'
+      * Milo DECARLI (lylou.decarli@sfr.fr)
+      * Raphaël GONCALVES DOS SANTOS (d.sraphy@free.fr)
+      * Amélie LE DANTEC
+      * Athène ROUSSEAU RAMBACH (athene.rousseaurambach@gmail.com)
+
+   * Equipe 'Code'
+      * Tom BOURLARD (bourlard.tom.94@gmail.com)
+      * Romain JUDAS
+      * Eliott MEUNIER
+      * Sylvain MEUNIER (sysyl.meunier@hotmail.fr)
+      * Lucas PICHON
+
+   * Solène NEUVILLE
+
+Avec l'aide de :
+   * Térence DAGANNAUD-DELISLE
+   * Athénaïs HAROUARD
+   * Alexandre MICHEL
+
+Contact : en cas de besoin, envoyez un mail à : welink.ctl@gmail.com
 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
