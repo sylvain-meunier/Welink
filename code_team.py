@@ -291,7 +291,7 @@ def ban(userid, reason, time=15) :
     except :
         mongo.db.Banned.update({"_id" : userid}, {"$set" : {'temps':time, "raison" : reason, "date":date(format1=fdate)}})
 
-def delete_user(userid, tempserversession) :
+def delete_user(userid) :
     """ Supprime toute trace de l'utilisateur dans la BDD """
     msgs = mongo.db.Messages.find({"userid" : userid})
     for msg in msgs :
