@@ -1,12 +1,12 @@
-from flask import render_template, request, redirect as redirect_flask_ver, url_for, session
+from flask import render_template, request, redirect, session, url_for as url_for_flask_ver
 from requests_oauthlib import OAuth2Session
 from code_team import *
 import os
 
 
-def redirect(url) :
-    """ Raccourci pour la fonction redirect de flask """
-    return redirect_flask_ver(url, _external=True, _scheme="https")
+def url_for(url) :
+    """ Raccourci pour la fonction url_for de flask """
+    return url_for_flask_ver(url, _external=True, _scheme="https")
 
 def update_session():
     """ Met à jour la session de l'utilisateur, puisque socketio refuse de la faire, même avec manage_session = False """
@@ -124,7 +124,7 @@ def profile(user_id="none"):
     update_session()
 
     if user_id == "none" :
-        return redirect("/profil/" + session['user_info']['_id'])
+        return redirect(app_url + "/profil/" + session['user_info']['_id'])
 
     tprofil, user, blocked = "son_profile 3.0.html", session['user_info'], None
     if session['user_info']['_id'] != user_id :
