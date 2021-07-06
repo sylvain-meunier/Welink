@@ -39,7 +39,7 @@ def favicon():
     """ Permet d'afficher le magnifique icône de notre glorieuse application à côté du nom de la fenêtre """
     return app.send_static_file('favicon.ico')
 
-@app.route("/connect") # Redirige vers la page de connection à l'ent
+@app.route("/connect") # Redirige vers la page de connexion à l'ent
 def connection():
     """ User Authorization """
     ent = OAuth2Session(client_id, scope="userinfo", redirect_uri=app_url+"/callback")
