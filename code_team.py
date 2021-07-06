@@ -22,8 +22,6 @@ convcolor = "#adfff3" # Couleur des notifications dans la liste des conversation
 with open("static/interests.array", 'r', encoding="utf-8") as file :
     gl_interets = file.read().splitlines() # Récupère les centres d'intérêt depuis le fichier interests.array
 
-tempserversession = {} # Permet de modifier la session Flask depuis les fonctions socket-io
-
 # App
 app = Flask("Welink")
 socketio = SocketIO(app)
@@ -291,7 +289,7 @@ def ban(userid, reason, time=15) :
     except :
         mongo.db.Banned.update({"_id" : userid}, {"$set" : {'temps':time, "raison" : reason, "date":date(format1=fdate)}})
 
-def delete_user(userid) :
+def delete_user(userid, tempserversession) :
     """ Supprime toute trace de l'utilisateur dans la BDD """
     msgs = mongo.db.Messages.find({"userid" : userid})
     for msg in msgs :
