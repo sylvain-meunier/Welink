@@ -1,8 +1,12 @@
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect as redirect_flask_ver, url_for, session
 from requests_oauthlib import OAuth2Session
 from code_team import *
 import os
 
+
+def redirect(url) :
+    """ Raccourci pour la fonction redirect de flask """
+    return redirect_flask_ver(url, _external=True, _scheme="https")
 
 def update_session():
     """ Met à jour la session de l'utilisateur, puisque socketio refuse de la faire, même avec manage_session = False """
@@ -32,7 +36,7 @@ def home() :
 
 @app.route('/favicon.ico') # Création de la route pour l'icône à gauche du titre
 def favicon():
-    """ Permet d'afficher la magnifique icône de notre glorieuse application à côté du nom de la fenêtre """
+    """ Permet d'afficher le magnifique icône de notre glorieuse application à côté du nom de la fenêtre """
     return app.send_static_file('favicon.ico')
 
 @app.route("/connect") # Redirige vers la page de connection à l'ent
