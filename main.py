@@ -18,7 +18,9 @@ def update_session():
     except Exception as e :
         print("SERVER_ERROR", e) # for debugging purposes
 
-# les variables app, tempserversession et socketio sont importées depuis code_team.py
+tempserversession = {} # Permet de modifier la session Flask depuis les fonctions socket-io
+
+# les variables app et socketio sont importées depuis code_team.py
 
 # ================================== FLASK APP ================================== #
 
