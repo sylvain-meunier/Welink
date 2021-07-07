@@ -198,17 +198,6 @@ function hide_msg(btn, fulltext, reducedtext){
   msg.parentNode.children[0].scrollIntoView({ behavior: 'smooth' })
 };
 
-function update_msginfo(id, nb){
-  // Met à jour le nombre de commentaires
-  var btn = document.getElementById("msginfo" + id + "comm");
-  btn.firstChild.innerHTML = "<i class='fas fa-comment'></i> (" + nb + ")";
-};
-
-function jsmsginfo(id){
-  // Useless ?
-  socket.emit('msginfo', id, callback=update_msginfo);
-};
-
 function delete_msg(msgid){
   // Demande à l'utilisateur s'il souhaite supprimer un post
   notifier.confirm('Voulez-vous vraiment supprimer ce post ?\nCela supprimera également tous les commentaires associés.',
