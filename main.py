@@ -153,7 +153,7 @@ def actu():
 
     update_session()
 
-    msgs = get_msg(session['user_info'], {"interets": {"$in": session['user_info']['interets']}}, session['user_info'])[::-1]
+    msgs = get_msg(session['user_info'], {"interets": {"$in": session['user_info']['interets']}})[::-1]
     return render_template("actu.html", user=session['user_info'], convcolor = convcolor, msgs=msgs, etat='profil', navbar="Mon profil", previous=None, maxtitre=limite_titre, maxcontenu=limite_contenu)
 
 @app.route("/post", methods=["GET", "POST"])
@@ -257,7 +257,7 @@ def interet(value):
         session.modified = True
         return redirect(url_for('.home'))
     update_session()
-    msgs = get_msg(session['user_info'], {"interets": {"$in": [value]}}, session['user_info'])[::-1]
+    msgs = get_msg(session['user_info'], {"interets": {"$in": [value]}})[::-1]
     if not msgs :
         return render_template("no_msg.html", user = session['user_info'], convcolor = convcolor)
     return render_template("actu.html", convcolor = convcolor, user=session['user_info'], msgs=msgs, etat='profil', navbar="Mon profil", previous=None, maxtitre=limite_titre, maxcontenu=limite_contenu)

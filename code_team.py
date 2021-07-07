@@ -91,10 +91,10 @@ def check_birthday(naissance, format_naiss="%d-%m"):
             return "\U0001f382 "
     return ""
 
-def get_msg(user_info, filtre, user, statut = "msg") :
+def get_msg(user, filtre) :
     """ Filtre les données du l'utilisateur pour renvoyer les messages de son fil d'actualité """
     l = []
-    filtre['statut'] = statut
+    filtre['statut'] = "msg"
     msg = mongo.db.Messages.find(filtre)
     for i in msg :
         author = mongo.db.Users.find_one({'_id' : i['userid']}) # trouve l'auteur du message
