@@ -94,12 +94,12 @@ def checkuser() :
         return render_template('banned.html', end = date(date=end, format1=fdate), reason=banned["raison"])
     session['user_info'] = user_info
     try :
-        user_info['selfinterets'] = user_info['interets'].copy()
+        user_info['selfinterets'] = user_info['interets'].copy() # permet de ne pas confondre les centres d'intérêts de l'utilisateur et ceux d'un autre utilisateur lorsqu'un autre profil est visité.
         user_info['selfinterets'].sort()
         user_info['convs'] = get_conv(user_info['_id'])
         for attribute in ['notifon', "autoscroll"] :
-            if not attribute in user_info :
-                user_info[attribute] = 1
+            if not attribute in user_info : # par défaut, ces attributs sont définies à True.
+                user_info[attribute] = True
     except :
         return redirect(url_for(".home"))
     if not user_info['_id'] in tempserversession :
