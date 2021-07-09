@@ -61,10 +61,12 @@ Escouade composée de :
       * Eliott MEUNIER
       * Sylvain MEUNIER (sysyl.meunier@hotmail.fr)
       * Lucas PICHON
+      * Baptiste VAFIADES (baptvafi@gmail.com)
 
    * Solène NEUVILLE
 
 Avec l'aide de :
+   * Romain LIBLAUD
    * Térence DAGANNAUD-DELISLE
    * Athénaïs HAROUARD
    * Alexandre MICHEL
