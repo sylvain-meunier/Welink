@@ -63,8 +63,6 @@ Escouade composée de :
       * Lucas PICHON
       * Baptiste VAFIADES (baptvafi@gmail.com)
 
-   * Solène NEUVILLE
-
 Avec l'aide de :
    * Romain LIBLAUD (Animateur)
    * Térence DAGANNAUD-DELISLE
