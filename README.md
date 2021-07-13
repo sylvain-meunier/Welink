@@ -64,6 +64,7 @@ Escouade composée de :
       * Baptiste VAFIADES (baptvafi@gmail.com)
 
 Avec l'aide de :
+   * Samia BOUCHELKIA (Animatrice)
    * Romain LIBLAUD (Animateur)
    * Térence DAGANNAUD-DELISLE
    * Athénaïs HAROUARD
