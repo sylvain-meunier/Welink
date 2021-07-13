@@ -66,7 +66,7 @@ Escouade composée de :
    * Solène NEUVILLE
 
 Avec l'aide de :
-   * Romain LIBLAUD
+   * Romain LIBLAUD (Animateur)
    * Térence DAGANNAUD-DELISLE
    * Athénaïs HAROUARD
    * Alexandre MICHEL
