@@ -29,6 +29,7 @@ MODULES UTILISES :
 * Python integrated :
     * os (https://docs.python.org/fr/3/library/os.html)
     * time (https://docs.python.org/fr/3/library/time.html)
+    * json (https://docs.python.org/fr/3/library/json.html)
 
 * CSS :
     * Bulma (https://bulma.io/)
