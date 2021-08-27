@@ -29,6 +29,7 @@ MODULES UTILISES :
 * Python integrated :
     * os (https://docs.python.org/fr/3/library/os.html)
     * time (https://docs.python.org/fr/3/library/time.html)
+    * json (https://docs.python.org/fr/3/library/json.html)
 
 * CSS :
     * Bulma (https://bulma.io/)
@@ -61,10 +62,11 @@ Escouade composée de :
       * Eliott MEUNIER
       * Sylvain MEUNIER (sysyl.meunier@hotmail.fr)
       * Lucas PICHON
-
-   * Solène NEUVILLE
+      * Baptiste VAFIADES (baptvafi@gmail.com)
 
 Avec l'aide de :
+   * Samia BOUCHELKIA (Animatrice)
+   * Romain LIBLAUD (Animateur)
    * Térence DAGANNAUD-DELISLE
    * Athénaïs HAROUARD
    * Alexandre MICHEL
