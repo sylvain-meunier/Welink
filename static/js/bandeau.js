@@ -7,6 +7,7 @@ function set_globals(data){
     window.convcolor = data["convcolor"] ;
     window.scroll_var = data['user']['autoscroll'] ;
     window.notifon = data['user']['notifon'] ;
+    window.maxnotifs = data['maxnotifs']
 }
 
 function loading(btn){
@@ -25,10 +26,38 @@ function unloading(btn){
     }
 };
 
+function replace_convs(){
+    // Place les dernières conversations qui ont reçu un message en haut de la liste
+    // notification({'namespace':'60e33e5349bc95d6253d6dd4'})
+    const userlist = document.getElementById("userconversationslist");
+    let ind = 0, curind = 0, maxi = userlist.children.length;
+    while (curind < maxi) {
+        if (ind < maxi && userlist.children[curind].firstChild.style.backgroundColor){
+            userlist.insertBefore(userlist.children[curind], userlist.children[ind]);
+            ind++;
+        };
+        curind++;
+    };
+};
+
 function notification(data){
-    // Affiche une notification
+    // Gère les notification
     if (data['namespace']){
-        document.getElementById("listebandeauconv" + data['namespace']).style.backgroundColor = convcolor;
+        var conv = document.getElementById("listebandeauconv" + data['namespace']);
+        conv.style.backgroundColor = convcolor;
+        amount = conv.getAttribute("data-amount")
+        if (!amount){
+            conv.setAttribute("data-amount", "1");
+        }else{
+            amount = parseInt(amount)
+            if(amount === maxnotifs || amount === maxnotifs.toString() + "+"){
+                conv.setAttribute("data-amount", maxnotifs.toString() + "+");
+            }else{
+                amount++;
+                conv.setAttribute("data-amount", amount.toString());
+            }
+        };
+        replace_convs()
         if (window.notifon){
             var notif = new AWN();
             var contenu = sanitize(data['contenu']).slice(0, 40)
@@ -61,8 +90,8 @@ function notification(data){
 
 function received_private_msg(data){
     // Affiche le message privé ou envoie une notification selon la page que consulte l'utilisateur
-    writemsg = document.getElementById("textmp" + data['namespace']);
-    if (writemsg){
+    writemsg = document.getElementById("new_pm_textarea");
+    if (writemsg && writemsg.getAttribute("namespace") === data['namespace']){
         add_msg_to_screen(data) // affiche le message
         socket.emit("removenotifs", "privs", data['namespace'])
     }else{
@@ -146,18 +175,18 @@ function bandeausearch(){
 
 function search_template_msg(data){
     // Template de post pour les recherches
-    return "<p><figure class=\"image is-64x64\"><a href=\"/profil/" + data["userid"] + "\"><img class=\"is-rounded\" src=\"https://ent.iledefrance.fr/userbook/avatar/" + data["userid"] + "?thumbnail=100x100\" title=\"Voir le profil\"></a></figure>" + sanitize(data['titre']) + "</p>" + "<p>" + sanitize(data['contenu']) + "</p><hr>"
+    return "<p><figure class=\"image is-64x64\"><a href=\"/profil/" + data["userid"] + "\"><img class=\"is-rounded\" src=\"https://ent.iledefrance.fr/userbook/avatar/" + data["userid"] + "?thumbnail=100x100\" title=\"Voir le profil\"></a></figure>" + sanitize(data['titre']) + "</p>" + "<p>" + sanitize(data['contenu']) + "</p>"
 };
 
 function search_template_com(data){
     // Template de commentaire pour les recherches
-    return "<p><figure class=\"image is-64x64\"><a href=\"/profil/" + data["userid"] + "\"><img class=\"is-rounded\" src=\"https://ent.iledefrance.fr/userbook/avatar/" + data["userid"] + "?thumbnail=100x100\" title=\"Voir le profil\"></a></figure>" + sanitize(data['contenu']) + "</p><hr>"
+    return "<p><figure class=\"image is-64x64\"><a href=\"/profil/" + data["userid"] + "\"><img class=\"is-rounded\" src=\"https://ent.iledefrance.fr/userbook/avatar/" + data["userid"] + "?thumbnail=100x100\" title=\"Voir le profil\"></a></figure>" + sanitize(data['contenu']) + "</p>"
 };
 
 function search_template_user(data){
     // Template d'utilisateur pour les recherches
     data['prenom'] += " ";
-    return "<p><figure class=\"image is-64x64\"><a href=\"/profil/" + data["_id"] + "\"><img class=\"is-rounded\" src=\"https://ent.iledefrance.fr/userbook/avatar/" + data["_id"] + "?thumbnail=100x100\" title=\"Voir le profil\"></a></figure>" + data['prenom'] + data['nom'] + "</p>" + "<p>" + sanitize(data['lycee']) + "</p><hr>"
+    return "<a href=\"/profil/" + data["_id"] + "\"><div><p><figure class=\"image is-64x64\"><img class=\"is-rounded\" src=\"https://ent.iledefrance.fr/userbook/avatar/" + data["_id"] + "?thumbnail=100x100\" title=\"Voir le profil\"></figure>" + data['prenom'] + data['nom'] + "</p>" + "<p>" + sanitize(data['lycee']) + "</p></div></a>"
 };
 
 function set_result_search(results, kind){
@@ -178,7 +207,8 @@ function set_result_search(results, kind){
             }
             window.lastsearchid = result['_id']
             div.id = result['_id']
-            document.getElementById("searchresultdiv").appendChild(div)
+            div.classList.add('search_result')
+            document.getElementById("searchresultdiv").append(div, document.createElement('hr'))
         }
     };
     unloading(document.getElementById("bandeauresearchbutton"))
@@ -234,7 +264,8 @@ function conv_deleted(data){
     var convid = data['convid']
     var username = data['convname']
     socket.emit("conv_disapeared", convid)
-    if (document.getElementById("textmp" + convid)){ // L'utilisateur est dans la conversation...
+    const temp1 = document.getElementById("new_pm_textarea")
+    if (temp1 && temp1.getAttribute("namespace")){ // L'utilisateur est dans la conversation...
         new AWN().confirm("Cette conversation a été supprimée car " + username + " l'a quittée.", () => redirect_user("/profil", convid), false, {
             labels: {
                 confirm : "Information"
@@ -278,6 +309,12 @@ socket.on("alert_user", alert_user) ;
 socket.on("specificuserinfo", serverspeaking) ;
 socket.on("conv_deleted", conv_deleted) ;
 socket.on("when_msg_deleted", when_msg_deleted)
+
+window.onload = replace_convs ;
+
+if (!window.convcolor){
+    window.convcolor = "#adfff3";
+}
 
 let notifier = new AWN({});
 let currentCallOptions = {}

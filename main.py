@@ -301,40 +301,58 @@ def report(userid) :
 
     return render_template("post_creation.html", convcolor = convcolor, previous="Report de " + user['prenom'] + " " + user['nom'], user=session['user_info'], contact=True, etat="actu", navbar="Fil d'actualités", reportid = user['_id'], check_birthday=check_birthday)
 
-@app.route("/mp/<namespace>")
+@app.route("/mp/<namespace>", methods=['GET', 'POST'])
 def private_msg(namespace) :
     """ Permet d'afficher une conversation """
+    skip = 0
+
+    if request.method == 'POST' and 'skip' in request.form:
+        skip = int(request.form['skip'])
+
     if 'user_info' in session : # Teste si l'utilisateur est connecté
         if namespace == "undefined" :
             emit("alert_user", "Impossible de se connecter à cette conversation.\nEssayez de rafraîchir la page", namespace="/", room=session['user_info']['_id'])
             return redirect(url_for('.home'))
+
         try :
             conv = mongo.db.Conversations.find_one({'_id' : ObjectId(namespace)})
         except :
             conv = None
+
         if not conv :
             return redirect(url_for('.actu'))
 
         update_session() # TONARI NO TO TO RO TOTORO TO TO RO TOTORO
 
         other_user = mongo.db.Users.find_one({"_id" : conv['users'][conv['users'][0]==session['user_info']['_id']]})
+
         if 'blocked' in other_user and session['user_info']['_id'] in other_user['blocked'] :
             return render_template("alert_user.html", msg = "Cet utilisateur vous a bloqué, vous ne pouvez plus lui envoyer de messages privés.", user = session['user_info'])
+
         if not conv["nom"] :
             nom = other_user["prenom"] + " " + other_user['nom']
+
         if conv and session['user_info']['_id'] in conv["users"] : # S'assure que seules les personnes dans la conversion y ont accès (et pas n'importe qui possédant l'identifiant)
-            messages = get_privates(ObjectId(namespace), session['user_info'])
+            messages = get_privates(ObjectId(namespace), session['user_info'], skip=skip)
+
             try :
                 del session['user_info']['notifs']['privs'][namespace] # Annule la notification pour cette conversation, si elle existe
                 session.modified = True
             except : pass
+
             try :
                 user = mongo.db.Users.find_one({'_id' : session['user_info']['_id']}) # De même dans la BDD
                 del user['notifs']['privs'][namespace]
                 mongo.db.Users.update_one({'_id' : user['_id']}, {"$set" : {"notifs" : user["notifs"]}})
             except : pass
+
             userid = mongo.db.Users.find_one({"_id" : conv['users'][conv['users'][0]==session['user_info']['_id']]})
+
+            if skip > 0:
+                return json.dumps(messages)
+
             return render_template("privconv.html", convcolor=convcolor, user=session['user_info'], msgs=messages, etat='actu', navbar="Fil d'actualités", maxcontenu=limite_contenu, var_namespace=namespace, convname=conv['nom'], convid=conv['_id'], useridpdp=userid)
+
     session['nextpage'] = "actu"
     session.modified = True
     return redirect(url_for('.home'))
@@ -397,7 +415,7 @@ def handle_connection(auth) :
     session.modified = True
     if 'user_info' in session :
         join_privates(session["user_info"], True)
-        emit("senduserinfo", {"user" : session['user_info'], "maxcontenu" : limite_contenu, "maxtitre" : limite_titre, "colors" : colors, "convcolor" : convcolor})
+        emit("senduserinfo", {"user" : session['user_info'], "maxcontenu" : limite_contenu, "maxtitre" : limite_titre, "colors" : colors, "convcolor" : convcolor, "maxnotifs" : maxnotifs})
         join_room(session['user_info']['_id'])
 
 @socketio.on("disconnect")
@@ -443,9 +461,12 @@ def handle_send_msgprv(content, namespace, img=None) :
                 if not "notifs" in user :
                     user['notifs'] = {}
                 if not "privs" in user['notifs'] :
-                    user['notifs']['privs'] = {namespace : None}
+                    user['notifs']['privs'] = {namespace : 1}
                 else :
-                    user['notifs']['privs'][namespace] = None
+                    if not namespace in user['notifs']['privs'] :
+                        user['notifs']['privs'][namespace] = 1
+                    elif user['notifs']['privs'][namespace] < maxnotifs :
+                        user['notifs']['privs'][namespace] += 1
                 mongo.db.Users.update_one({'_id' : userid}, {'$set' : {"notifs" : user['notifs']}})
         emit('private_msg_received', {'prenom' : session['user_info']['prenom'], 'nom' : session['user_info']['nom'], 'userid' : session['user_info']['_id'], 'contenu' : content, 'img' : img, 'namespace':namespace, "date" : "Maintenant"}, broadcast=True, to=namespace)
         pysend_private_msg(infos, namespace, session['user_info']['_id'])

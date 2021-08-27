@@ -1,0 +1,48 @@
+html{
+    overflow: hidden;
+}
+#pagemaincontent{
+    height: calc(100vh - 64px); /*64px = bandeau*/
+}
+div.textarea{
+    min-height: 3em !important;
+    max-height: 9em !important;
+    overflow: auto;
+    height: auto;
+    resize: none;
+}
+#privmsgbox{
+    height: calc(100vh - 64px - 128 - 1.25rem - 1em);
+    overflow: auto;
+}
+#headband{
+    margin-top: 0px;
+}
+.message div{
+    margin-bottom: 0px !important;
+}
+.message{
+    margin-bottom: 1em;
+    padding: 1em;
+}
+.pm_me{
+    text-align: right;
+}
+.conv-notification[data-amount]::after {
+    content: attr(data-amount);
+    border-radius: 5rem;
+    padding-inline: 3%;
+    margin-left: 3%;
+    background: red;
+}
+
+/**********Search***********/
+#searchresultdiv a{
+    color: black;
+}
+.search_result{
+    padding: 1em;
+}
+.search_result:hover{
+    box-shadow: grey 0px 0px 3px;
+}

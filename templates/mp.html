@@ -1,12 +1,14 @@
-<div class="columns" style="padding-bottom: 0px;">
-    <div class="column" style="padding-bottom: 0px;">
-        <div class="media" style="padding-bottom: 0px;">
-            <div class="media-content" style="padding-bottom: 0px;">
-                <p class="is-size-6" style="padding-bottom: 0px; word-break: break-word;">{{msg['date']}} {{msg['prenom']}} {{msg['nom']}} :</p>
+<div class="message {{ msg['class'] }}">
+    <div class="columns" style="padding-bottom: 0px;">
+        <div class="column" style="padding-bottom: 0px;">
+            <div class="media" style="padding-bottom: 0px;">
+                <div class="media-content" style="padding-bottom: 0px;">
+                    <p class="is-size-6" style="padding-bottom: 0px; word-break: break-word;">{{msg['date']}} {{msg['prenom']}} {{msg['nom']}} :</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="block" style="word-break: break-word;">
-    {{msg['contenu']}}
+    <div class="block" style="word-break: break-word;">
+        {{msg['contenu']}}
+    </div>
 </div>

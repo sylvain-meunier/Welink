@@ -9,7 +9,7 @@
       <div class="media-content">
         <div class="field">
           <p class="control">
-            <input class="textarea" id="textmp{{var_namespace}}" rows=1 style="width: 100%;" maxlength="900" placeholder="Envoyer un message..." autofocus required>
+              <div class="textarea" id="new_pm_textarea" namespace={{var_namespace}} placeholder="Envoyer un message..." autofocus required contenteditable="true"></div>
           </p>
         </div>
         <nav class="level">
@@ -19,7 +19,7 @@
                   Envoyer
               </button>
               <script type="text/javascript">
-                  input = document.getElementById("textmp{{var_namespace}}")
+                  input = document.getElementById("new_pm_textarea")
                   input.scrollIntoView()
                   btn = document.getElementById("buttmp{{var_namespace}}")
                   input.addEventListener("keyup", function(event) {

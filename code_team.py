@@ -14,6 +14,8 @@ import time
 limite_mp = 100 # nombre limite de message privé par conversation
 limite_titre = 115 # nombre limite de caractères pour le titre des posts
 limite_contenu = 630 # nombre limite de caractères pour le contenu du message
+limit_mp_post = 10 # nombre de messages privés qu'on affiche par vague
+maxnotifs = 9 # nombre maximal de notifications qui peuvent être indiquées par une notification propre
 contact_mail = "welink.ctl@gmail.com"
 timezone = pytz.timezone("Europe/Paris")
 colors = ["218, 207, 247", "222, 231, 142"] # couleurs alternées des commentaires
@@ -146,18 +148,26 @@ def join_privates(user, cond) :
     for conv in conversations :
         join_room(str(conv['_id'])) # rejoint les groupes des conversations
 
-def get_privates(namespace, user) :
-    ''' Renvoie les messages privés associés à la conversation passée en argument '''
+def get_privates(namespace, user, limit=limit_mp_post, skip=0) :
+    ''' Renvoie par vagues les messages privés associés à la conversation passée en argument '''
     sortie = []
-    messages = mongo.db.Privates.find({'namespace' : namespace})
-    for msg in messages :
+    messages = mongo.db.Privates.find({'namespace' : namespace}).sort('date', -1).skip(skip).limit(limit)
+    for msg in messages:
         author = user
-        if msg['userid'] != user["_id"] :
-            author = mongo.db.Users.find_one({'_id' : msg["userid"]})
+        msg['class'] = 'pm_me'
+        if msg['userid'] != user["_id"]:
+            author = mongo.db.Users.find_one({'_id': msg["userid"]})
+            msg['class'] = 'pm_other'
         msg['nom'] = author['nom']
         msg['prenom'] = check_birthday(author["naissance"]) + author['prenom']
         msg['date'] = current_date(msg['date'])
+
+        if skip > 0:
+            del msg['_id']
+            del msg['namespace']
+
         sortie.append(msg)
+
     return sortie
 
 def register(user_info) :
@@ -297,7 +307,7 @@ def delete_user(userid, tempserversession) :
     convs = mongo.db.Conversations.find({"users": {"$in" : [userid]}})
     for conv in convs :
         leave_conv(conv['_id'], userid) # Supprime les conversations
-    mongo.db.Privates.delete_many({"userid" : userid}) # Supprime les messages privés, si jamais il en restait
+    mongo.db.Privates.delete_many({"userid" : userid}) # Supprimer les messages privés, si jamais il en restait
     mongo.db.Banned.delete_one({'_id' : userid}) # Supprime l'utilisateur de la table des Bannis
     mongo.db.Users.delete_one({'_id' : userid}) # Supprime l'utilisateur
     if userid in tempserversession :
